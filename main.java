@@ -1,33 +1,52 @@
-package tp2.src.structure;
+package tp2.src.structure2;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class main {
 
 	public static void main(String[] args) throws IOException {
-	/*	// TODO Auto-generated method stub
-		Atom at1 = new Atom(")");
-		Atom at2 = new Atom(")");
-		Atom at3 = new Atom(")");
-		
-		FactBase f= new FactBase("at1;at2");
-		f.addAtomWithoutCheck(at3);
-		
-		System.out.println(f.toString());
-		
-		Rule r1 = new Rule("at1;at2;at3");
-		RuleBase r = new RuleBase();
-		r.addRule(r1);
-		
-		
-		System.out.println(r1.toString());*/
-		
-		KnowledgeBase k=new KnowledgeBase("reunion.txt");
+
+		System.out.println("Chargement de la base .... ");
+		KnowledgeBase k=new KnowledgeBase("C:\\\\Users\\\\Fireez\\\\Desktop\\\\Master\\\\eclipse\\\\reunion.txt");
 		System.out.println(k.toString());
-		System.out.println();
+		
 		k.ForwardChaining();
-		System.out.println(k);
+		System.out.println();
+		System.out.println(k.toString());
+		
+		
+		
+		while(true) {
+			
+			String x;
+			ArrayList<Atom> a = new ArrayList<Atom>();
+			
+			
+			Scanner sc = new Scanner(System.in);
+			System.out.println("Veuillez saisir un atome :");
+			String str = sc.nextLine();
+			System.out.println("Vous avez saisi : " + str);
+			
+			Atom X = new Atom(str);
+			
+			System.out.println("Recherche dans la base de faits saturée ");
+			if (k.factssat.belongsAtom(X)) {
+				System.out.println("Réponse : oui !");
+			}
+			else 
+				System.out.println("Réponse : non !");
+			
+			System.out.println("Recherche par BackwardChaining ");
+			
+		/*	if (k.BackwardChaining(X,a)) {
+				System.out.println("Réponse : oui !");
+			}
+			else 
+				System.out.println("Réponse : non !");*/
+		}
+		
 	}
 
 }

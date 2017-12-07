@@ -1,4 +1,4 @@
-package tp2.src.structure;
+package tp2.src.structure2;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -81,17 +81,23 @@ public class KnowledgeBase {
 
 	public boolean BackwardChaining(Atom q,ArrayList<Atom> l) {
 		if (facts.belongsAtom(q)) {return true;}
+		boolean test = false;
 		for(int i=0;i < rules.size();i++) {
 			for(int j=0; j < rules.getRule(i).getHypothesis().size(); j++) {
-				if (l.contains(rules.getRule(i).getHypothesis().get(j))) {return false;}
-				else{int k=1;
-				while (k<rules.getRule(i).getHypothesis().size() && BackwardChaining(rules.getRule(i).getHypothesis().get(j),l)) {
+				if (l.contains(rules.getRule(i).getHypothesis().get(j))) {test = true;}
+			}
+			if (test == false) {
+				int k=1;
+				l.add(rules.getRule(i).getConclusion());
+				while (k<rules.getRule(i).getHypothesis().size() && BackwardChaining(rules.getRule(i).getHypothesis().get(k),l)) {
+					l.remove(rules.getRule(i).getConclusion());
 					k++;
 				}
 				if (k > rules.getRule(i).getHypothesis().size()) return true;
+				test = false;
 				}
+			
 			}
-		}
 		return false;
 	}
 

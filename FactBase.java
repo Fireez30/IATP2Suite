@@ -1,4 +1,4 @@
-package tp2.src.structure;
+package tp2.src.structure2;
 
 import java.util.*;
 
